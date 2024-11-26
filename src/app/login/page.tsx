@@ -1,103 +1,84 @@
-// src/app/login/page.tsx
+"use client";
 
-'use client';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-
-interface LoginData {
-  name: string;
-  whatsapp: string;
-  password: string;
-}
-
-export default function LoginPage() {
-  const [loginData, setLoginData] = useState<LoginData>({
-    name: '',
-    whatsapp: '',
-    password: ''
-  });
-
-  const [error, setError] = useState<string>('');
-  const [success, setSuccess] = useState<string>('');
-
+const LoginPage = () => {
+  const [name, setName] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setLoginData((prev) => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+  // Verificar se o usuário está autenticado ao carregar a página
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+    if (token) {
+      // Redireciona para a página inicial caso o token de autenticação esteja presente
+      router.push("/");
+    }
+  }, [router]);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const { name, whatsapp, password } = loginData;
-
-    // Validação dos campos
-    if (!name || !whatsapp || !password) {
-      setError('Nome, WhatsApp e Senha são obrigatórios!');
-      return;
-    }
-
     try {
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(loginData),
+      const response = await axios.post("http://localhost:3000/api/auth/login", {
+        name,
+        whatsapp,
+        password,
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        setSuccess('Login realizado com sucesso!');
-        localStorage.setItem('token', data.token); // Armazena o token no localStorage
-        setTimeout(() => router.push('/'), 2000); // Redirecionar para a home após o login
-      } else {
-        const data = await response.json();
-        setError(data.error || 'Erro ao fazer login, tente novamente.');
-      }
-    } catch (error) {
-      setError('Erro ao enviar a requisição.');
+      // Armazenar o token e os dados do usuário no localStorage
+      localStorage.setItem("authToken", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+
+      // Redirecionar para a página principal ou dashboard
+      router.push("/");
+    } catch (err) {
+      setError("Erro ao fazer login, verifique suas credenciais.");
+      console.error(err);
     }
   };
 
   return (
     <div>
       <h1>Login</h1>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
-      {success && <div style={{ color: 'green' }}>{success}</div>}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Nome"
-          value={loginData.name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="whatsapp"
-          placeholder="WhatsApp"
-          value={loginData.whatsapp}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Senha"
-          value={loginData.password}
-          onChange={handleChange}
-          required
-        />
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      <form onSubmit={handleLogin}>
+        <div>
+          <label>Nome</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>WhatsApp</label>
+          <input
+            type="text"
+            value={whatsapp}
+            onChange={(e) => setWhatsapp(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Senha</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
         <button type="submit">Entrar</button>
       </form>
-      <p>Não tem uma conta? <a href="/register">Registrar</a></p>
     </div>
   );
-}
+};
+
+export default LoginPage;

@@ -16,27 +16,6 @@
   font-family: var(--font-geist-sans);
 }
 
-/* .header {
-  display:flex;
-  justify-content: center;
-  gap:20px;
-  width: 100vw;
-  height: 40px;
-  margin:0 auto;
-  position: absolute;  
-  top:0;
-  background: #00bf62;
-
-
-}
-
-.header a {
-    cursor: pointer;
-    margin-top: 10px;
-    font-size: 18px;
-    color: #fff;
-
-} */
 .main {
   display: flex;
   flex-direction: column;

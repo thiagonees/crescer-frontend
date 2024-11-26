@@ -1,0 +1,55 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f7f3f3;
+  color: #5e5b5b;
+  position: absolute;
+  top:0;
+  width: 100vw;
+  height: 50px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+}
+
+.userInfo span {
+  margin-right: 15px;
+  font-weight: 600;
+}
+
+.logoutButton {
+  padding: 8px 12px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logoutButton:hover {
+  background-color: #c0392b;
+}
+
+.authButtons button {
+  padding: 8px 12px;
+  margin-left: 10px;
+  background-color: #00bf62;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.authButtons button:hover {
+  background-color: #5ecca7;
+}
+
+.authButtons button:active {
+  background-color: #1c598f;
+}

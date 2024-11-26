@@ -1,9 +1,12 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import Header from "./components/Header";
+
 
 export default function Home() {
   return (
     <div className={styles.page}>
+            <Header /> 
       <main className={styles.main}>
       <Image
           className={styles.logo}
@@ -20,23 +23,7 @@ export default function Home() {
           <li>Save and see your changes instantly.</li>
         </ol> */}
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="/login"
-            rel="noopener noreferrer"
-          >
-            Login
-          </a>
-          <a
-            href="/register"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-           Registrar
-          </a>
-        </div>
-      </main>u
+      </main>
     </div>
   );
 }
