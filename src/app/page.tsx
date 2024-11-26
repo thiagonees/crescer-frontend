@@ -4,21 +4,25 @@ import styles from "./page.module.css";
 export default function Home() {
   return (
     <div className={styles.page}>
+      <header className={styles.header}>
+        <a href="/login">Login</a>
+        <a href='/register'>Registrar</a>
+      </header>
       <main className={styles.main}>
-        <Image
+      <Image
           className={styles.logo}
-          src="/next.svg"
+          src="/logo.jpeg"
           alt="Next.js logo"
-          width={180}
-          height={38}
+          width={300}
+          height={250}
           priority
         />
-        <ol>
+        {/* <ol>
           <li>
             Get started by editing <code>src/app/page.tsx</code>.
           </li>
           <li>Save and see your changes instantly.</li>
-        </ol>
+        </ol> */}
 
         <div className={styles.ctas}>
           <a
@@ -27,14 +31,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
+            Sobre nos
           </a>
           <a
             href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
@@ -42,7 +39,7 @@ export default function Home() {
             rel="noopener noreferrer"
             className={styles.secondary}
           >
-            Read our docs
+           Entre em contato
           </a>
         </div>
       </main>
