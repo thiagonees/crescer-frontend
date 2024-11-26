@@ -1,10 +1,11 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import styles from './login.module.css'; // Importa o CSS
 import Image from "next/image";
+import Inputmask from "inputmask"; // Importa o Inputmask
 
 const LoginPage = () => {
   const [name, setName] = useState("");
@@ -12,6 +13,24 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+
+  // Referência para o campo de WhatsApp
+  const whatsappRef = useRef<HTMLInputElement>(null);
+
+  // Aplicar a máscara no campo de WhatsApp
+  useEffect(() => {
+    const whatsappMask = new Inputmask("(99) 9 9999-9999");
+    
+    if (whatsappRef.current) {
+      whatsappMask.mask(whatsappRef.current);
+    }
+  }, []);
+
+  // Validação simples do WhatsApp (pode ser ajustada conforme necessário)
+  const validateWhatsapp = (value: string) => {
+    const regex = /^(\(\d{2}\)\s)?\d{1}\s\d{4,5}-\d{4}$/;
+    return regex.test(value);
+  };
 
   // Verificar se o usuário está autenticado ao carregar a página
   useEffect(() => {
@@ -25,6 +44,12 @@ const LoginPage = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Verificar se o WhatsApp é válido
+    if (!validateWhatsapp(whatsapp)) {
+      setError("Número de WhatsApp inválido.");
+      return;
+    }
 
     try {
       const response = await axios.post("http://localhost:3000/api/auth/login", {
@@ -71,11 +96,15 @@ const LoginPage = () => {
         <div>
           <label>WhatsApp</label>
           <input
+            ref={whatsappRef} // Referência para aplicar a máscara
             type="text"
             value={whatsapp}
             onChange={(e) => setWhatsapp(e.target.value)}
             required
           />
+          {whatsapp && !validateWhatsapp(whatsapp) && (
+            <p className={styles.error}>Número de WhatsApp inválido.</p>
+          )}
         </div>
         <div>
           <label>Senha</label>
