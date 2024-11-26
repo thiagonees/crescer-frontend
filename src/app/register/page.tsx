@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
+import styles from  "./register.module.css";
+import Image from "next/image";
+
 const RegisterPage = () => {
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
@@ -42,10 +45,18 @@ const RegisterPage = () => {
   };
 
   return (
-    <div>
-      <h1>Registrar</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleRegister}>
+    <div className={styles.container}>
+      <Image
+        className={styles.logo}
+        src="/logo.jpeg"
+        alt="Next.js logo"
+        width={300}
+        height={250}
+        priority
+      />
+      <form onSubmit={handleRegister} className={styles.form}>
+        <h1>Cadastrar</h1>
+        {error && <p className={styles.error}>{error}</p>}
         <div>
           <label>Nome</label>
           <input
@@ -82,7 +93,7 @@ const RegisterPage = () => {
             required
           />
         </div>
-        <button type="submit">Registrar</button>
+        <button type="submit">Entrar</button>
       </form>
     </div>
   );

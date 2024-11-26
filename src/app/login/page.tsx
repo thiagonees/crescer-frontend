@@ -1,8 +1,10 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import styles from './login.module.css'; // Importa o CSS
+import Image from "next/image";
 
 const LoginPage = () => {
   const [name, setName] = useState("");
@@ -44,10 +46,19 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleLogin}>
+    <div className={styles.container}>
+
+      <Image
+        className={styles.logo}
+        src="/logo.jpeg"
+        alt="Next.js logo"
+        width={300}
+        height={250}
+        priority
+      />
+      <form onSubmit={handleLogin} className={styles.form}>
+        <h1>Login</h1>
+        {error && <p className={styles.error}>{error}</p>}
         <div>
           <label>Nome</label>
           <input

@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import styles from './Header.module.css';
+import styles from './header.module.css';
 
 export default function Header() {
   const router = useRouter();
