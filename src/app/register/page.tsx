@@ -1,12 +1,13 @@
 "use client";
 
+import { ClipLoader } from "react-spinners"; //
 import { useState, useEffect, useRef } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Inputmask from "inputmask";
-
+import toast, { Toaster } from "react-hot-toast"; // Importando o toast e Toaster
 import styles from "./register.module.css";
 import Image from "next/image";
 
@@ -26,6 +27,7 @@ const validationSchema = Yup.object({
 
 const RegisterPage = () => {
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Estado para controlar o carregamento
   const router = useRouter();
 
   // Referências para os campos de entrada
@@ -55,23 +57,35 @@ const RegisterPage = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
+      setIsLoading(true); // Inicia o loading
+
       try {
         const response = await axios.post("http://localhost:3000/api/auth/register", values);
-        // Redireciona para a página de login após o registro
-        router.push("/login");
+
+        toast.success("Cadastro realizado com sucesso!", {
+          duration: 4000,
+        });
+
+        // Aguarda 2 segundos antes de redirecionar para a página de login
+        setTimeout(() => {
+          router.push("/login");
+        }, 2000);
+
       } catch (err) {
-        setError("Erro ao registrar, tente novamente.");
+        toast.error("Erro ao realizar o cadastro!", {
+          duration: 3000,
+        });
         console.error(err);
+      } finally {
+        setTimeout(() => setIsLoading(false), 2000); 
       }
     },
   });
 
-  // Verificar se o usuário está autenticado ao carregar a página
   useEffect(() => {
     const token = localStorage.getItem("authToken");
 
     if (token) {
-      // Redireciona para a página inicial caso o token de autenticação esteja presente
       router.push("/");
     }
   }, [router]);
@@ -147,8 +161,15 @@ const RegisterPage = () => {
             <p className={styles.error}>{formik.errors.password}</p>
           )}
         </div>
-        <button type="submit">Entrar</button>
+        <button
+          type="submit"
+          className={isLoading ? styles.disabled : ''}
+          disabled={isLoading}
+        >
+          {isLoading ? <ClipLoader color="#ffffff" size={20} /> : "Cadastrar"}
+        </button>
       </form>
+      <Toaster />
     </div>
   );
 };
