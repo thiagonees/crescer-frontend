@@ -17,6 +17,13 @@ export default function Footer() {
       >
         Fale conosco
       </a>
+
+      <a
+        href="/testimonials"
+        rel="noopener noreferrer"
+      >
+        Testemunhos
+      </a>
     </footer>
   );
 }
