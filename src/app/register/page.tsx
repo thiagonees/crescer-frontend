@@ -115,7 +115,7 @@ const RegisterPage = () => {
         src="/logo.jpeg"
         alt="Next.js logo"
         width={300}
-        height={250}
+        height={200}
         priority
       />
       <form onSubmit={formik.handleSubmit} className={styles.form}>

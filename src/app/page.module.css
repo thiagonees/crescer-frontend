@@ -6,24 +6,25 @@
   --button-primary-hover: #5ecca7;
   --button-secondary-hover: #5ecca7;
 
-  display: grid;
-  grid-template-rows: 20px 1fr 20px;
+  /* display: grid;
+  grid-template-rows: px 1fr 20px;
   align-items: center;
   justify-items: center;
   min-height: 100svh;
-  padding: 80px;
-  gap: 64px;
-  font-family: var(--font-geist-sans);
+
+  font-family: var(--font-geist-sans); */
 }
 
 .main {
-  display: flex;
+  display: grid;
   flex-direction: column;
-  gap: 32px;
+  place-items: center;
+  gap: 10px;
   grid-row-start: 2;
+  margin-top: 60px;
 }
 
-.main ol {
+/* .main ol {
   font-family: var(--font-geist-mono);
   padding-left: 0;
   margin: 0;
@@ -31,11 +32,11 @@
   line-height: 24px;
   letter-spacing: -0.01em;
   list-style-position: inside;
-}
+} */
 
-.main li:not(:last-of-type) {
+/* .main li:not(:last-of-type) {
   margin-bottom: 8px;
-}
+} */
 
 .main code {
   font-family: inherit;
@@ -70,7 +71,7 @@
   font-weight: 500;
 }
 
-a.primary {
+/* a.primary {
   background: var(--background-button);
   color: var(--background);
   gap: 8px;
@@ -80,7 +81,7 @@ a.secondary {
   background: var(--background-button);
   color: var(--background);
   min-width: 180px;
-}
+} */
 
 .footer {
   grid-row-start: 3;
