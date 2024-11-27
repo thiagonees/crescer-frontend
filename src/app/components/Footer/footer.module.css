@@ -2,13 +2,13 @@
     grid-row-start: 3;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 24px;
     width: 100vw;
-    height: 50px;
+    height: 60px;
     margin:0;
-    position: absolute;
-    bottom:0;
-    background: #00bf62;
+    position: relative;
+    background:#00bf62;
   }
   
   .footer a {
@@ -16,6 +16,7 @@
     align-items: center;
     gap: 8px;
     color: #fff;
+    height: 50px;
   
   }
   

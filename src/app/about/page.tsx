@@ -32,7 +32,7 @@ export default function AboutPage() {
           className={styles.image1}
           src="/images/image-1.jpeg"
           alt="Next.js logo"
-          width={400}
+          width={500}
           height={600}
           priority
         />

@@ -10,14 +10,24 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  height: 100%;
+
 }
 
 body {
+
+  display: flex;
+  flex-direction: column; /* Coloca os elementos filhos em coluna */
+
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  flex: 1; /* Faz o conteúdo crescer para ocupar o espaço restante */
 }
 
 * {

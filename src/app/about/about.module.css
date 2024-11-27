@@ -22,7 +22,7 @@
 .section {
   width: 100%;
   max-width: 1000px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   padding: 20px;
   border: 2px solid #00bf62;
   background-color: white;
@@ -80,8 +80,6 @@
     margin-bottom: 20px;
   }
 
-
-
   .imageGrid {
     display: grid;
     gap: 40px;
@@ -94,4 +92,26 @@
     width: 400px;
   }
 
+}
+
+@media (max-width: 992px) {
+  .imageContainer {
+    display: grid;
+    justify-content: center;
+    gap: 20px;
+    /* Espaço entre as imagens lado a lado */
+    margin-bottom: 20px;
+  }
+
+  .imageGrid {
+    display: grid;
+    gap: 40px;
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center;
+  }
+
+
+  .section img {
+    width: 400px;
+  }
 }

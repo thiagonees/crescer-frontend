@@ -53,3 +53,12 @@
 .authButtons button:active {
   background-color: #1c598f;
 }
+
+
+@media (max-width: 600px) {
+  .header {
+    position: absolute;
+    right: 5px;
+    top: 0;
+  }
+}
