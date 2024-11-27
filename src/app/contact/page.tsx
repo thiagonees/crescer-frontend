@@ -1,6 +1,7 @@
 
 import Image from 'next/image';
-import styles from './contact.module.css'; // CSS Modules
+import styles from './contact.module.css';
+
 
 export default function ContactPage() {
   return (
@@ -37,6 +38,8 @@ export default function ContactPage() {
           />
         </a>
       </div>
+
+      <a href='/message'>Cadastre-se ou faca login para enviar uma mensagem</a>
 
       <div className={styles.mapContainer}>
         <iframe

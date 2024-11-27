@@ -8,6 +8,10 @@
   padding: 20px;
 }
 
+.container a:hover {
+  text-decoration: underline;
+}
+
 .title {
   font-size: 2rem;
   margin-bottom: 40px;
