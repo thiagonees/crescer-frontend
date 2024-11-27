@@ -1,4 +1,4 @@
-import styles from "../../page.module.css";
+import styles from "./footer.module.css"
 export default function Footer() {
   return (
     <footer className={styles.footer}>
@@ -15,7 +15,7 @@ export default function Footer() {
         href="/contact"
         rel="noopener noreferrer"
       >
-        Fale com a gente
+        Fale conosco
       </a>
     </footer>
   );
