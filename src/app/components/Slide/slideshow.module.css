@@ -1,20 +1,104 @@
 .slideshow {
+  position: relative;
+  width: 100%;
+  max-height: 450px;
+  max-width: 700px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+}
+
+.slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.prevButton,
+.nextButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nextButton {
+  left: 10px;
+}
+
+.prevButton {
+  left: 10px;
+  top: 300px;
+}
+
+.prevButton:hover,
+.nextButton:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.indicators {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  margin: 0 6px;
+  position: relative;
+  bottom: 50px;
+  border-radius: 50%;
+  border: 1px solid;
+  background-color: #ccc;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.indicator.active {
+  background-color: #333;
+}
+
+
+@media (max-width: 600px) {
+
+  .slideshow {
     position: relative;
     width: 100%;
-    max-height: 450px;
+    max-height: 280px;
     max-width: 700px;
     margin: 0 auto;
     overflow: hidden;
     border: 2px solid #ccc;
     border-radius: 10px;
   }
-  
-  .slide img {
-    width: 100%;
-    height: auto;
-    display: block;
+
+  .indicator {
+    width: 10px;
+    height: 10px;
+    margin: 0 6px;
+    position: relative;
+    bottom: 50px;
+    border-radius: 50%;
+    border: 1px solid;
+    background-color: #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
   }
-  
+
+
+
   .prevButton,
   .nextButton {
     position: absolute;
@@ -32,104 +116,20 @@
     justify-content: center;
     align-items: center;
   }
-  
+
   .nextButton {
     left: 10px;
   }
-  
-  .prevButton {
-    left: 10px;
-    top: 300px;
-  }
-  
-  .prevButton:hover,
-  .nextButton:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-  
-  .indicators {
-    display: flex;
-    justify-content: center;
-    margin-top: 15px;
-  }
-  
-  .indicator {
-    width: 10px;
-    height: 10px;
-    margin: 0 6px;
-    position: relative;
-    bottom: 50px;
-    border-radius: 50%;
-    border: 1px solid;
-    background-color: #ccc;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .indicator.active {
-    background-color: #333;
-  }
-  
 
-  @media (max-width: 600px) {
-
-    .slideshow {
-        position: relative;
-        width: 100%;
-        max-height: 280px;
-        max-width: 700px;
-        margin: 0 auto;
-        overflow: hidden;
-        border: 2px solid #ccc;
-        border-radius: 10px;
-      }
-      
-    .indicator {
-        width: 10px;
-        height: 10px;
-        margin: 0 6px;
-        position: relative;
-        bottom: 50px;
-        border-radius: 50%;
-        border: 1px solid;
-        background-color: #ccc;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-      
-
-
-   .prevButton,
-  .nextButton {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .nextButton {
-    left: 10px;
-  }
-  
   .prevButton {
     left: 10px;
     top: 210px;
   }
-  
+
   .prevButton:hover,
   .nextButton:hover {
     background-color: rgba(0, 0, 0, 0.8);
   }
-  
 
-  }
+
+}
