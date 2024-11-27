@@ -1,4 +1,4 @@
-// pages/contact.tsx
+
 import Image from 'next/image';
 import styles from './contact.module.css'; // CSS Modules
 
