@@ -1,13 +1,13 @@
 "use client";
 
-import { ClipLoader } from "react-spinners"; //
+import { ClipLoader } from "react-spinners";
 import { useState, useEffect, useRef } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Inputmask from "inputmask";
-import toast, { Toaster } from "react-hot-toast"; // Importando o toast e Toaster
+import toast, { Toaster } from "react-hot-toast";
 import styles from "./register.module.css";
 import Image from "next/image";
 
@@ -26,8 +26,7 @@ const validationSchema = Yup.object({
 });
 
 const RegisterPage = () => {
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false); // Estado para controlar o carregamento
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   // Referências para os campos de entrada
@@ -57,27 +56,46 @@ const RegisterPage = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      setIsLoading(true); // Inicia o loading
+      setIsLoading(true);
 
       try {
         const response = await axios.post("http://localhost:3000/api/auth/register", values);
-
+      
         toast.success("Cadastro realizado com sucesso!", {
           duration: 4000,
         });
-
-        // Aguarda 2 segundos antes de redirecionar para a página de login
+      
         setTimeout(() => {
           router.push("/login");
         }, 2000);
-
-      } catch (err) {
-        toast.error("Erro ao realizar o cadastro!", {
-          duration: 3000,
-        });
-        console.error(err);
+      } catch (err: unknown) {
+        // Type guard para verificar se err é um objeto com response
+        if (
+          typeof err === "object" &&
+          err !== null &&
+          "response" in err &&
+          typeof (err as any).response === "object" &&
+          "data" in (err as any).response &&
+          typeof (err as any).response.data === "object"
+        ) {
+          const responseError = (err as any).response.data;
+          if (responseError.error) {
+            toast.error(responseError.error, {
+              duration: 3000,
+            });
+          } else {
+            toast.error("Erro ao realizar o cadastro!", {
+              duration: 3000,
+            });
+          }
+        } else {
+          // Caso o erro não tenha a estrutura esperada
+          toast.error("Erro inesperado!", {
+            duration: 3000,
+          });
+        }
       } finally {
-        setTimeout(() => setIsLoading(false), 2000); 
+        setTimeout(() => setIsLoading(false), 2000);
       }
     },
   });
@@ -102,7 +120,6 @@ const RegisterPage = () => {
       />
       <form onSubmit={formik.handleSubmit} className={styles.form}>
         <h1>Cadastrar</h1>
-        {error && <p className={styles.error}>{error}</p>}
         <div>
           <label>Nome</label>
           <input
@@ -163,7 +180,7 @@ const RegisterPage = () => {
         </div>
         <button
           type="submit"
-          className={isLoading ? styles.disabled : ''}
+          className={isLoading ? styles.disabled : ""}
           disabled={isLoading}
         >
           {isLoading ? <ClipLoader color="#ffffff" size={20} /> : "Cadastrar"}

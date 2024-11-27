@@ -29,7 +29,7 @@ export default function Header() {
       {user ? (
         <div className={styles.userInfo}>
           <span>Olá, {user.name}</span>
-          <button className={styles.logoutButton} onClick={handleLogout}>Logout</button>
+          <button className={styles.logoutButton} onClick={handleLogout}>Sair</button>
         </div>
       ) : (
         <div className={styles.authButtons}>

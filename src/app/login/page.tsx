@@ -1,17 +1,15 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import styles from './login.module.css'; // Importa o CSS
 import Image from "next/image";
 import Inputmask from "inputmask"; // Importa o Inputmask
 
 const LoginPage = () => {
-  const [name, setName] = useState("");
-  const [whatsapp, setWhatsapp] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const router = useRouter();
 
   // Referência para o campo de WhatsApp
@@ -26,12 +24,6 @@ const LoginPage = () => {
     }
   }, []);
 
-  // Validação simples do WhatsApp (pode ser ajustada conforme necessário)
-  const validateWhatsapp = (value: string) => {
-    const regex = /^(\(\d{2}\)\s)?\d{1}\s\d{4,5}-\d{4}$/;
-    return regex.test(value);
-  };
-
   // Verificar se o usuário está autenticado ao carregar a página
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -42,37 +34,44 @@ const LoginPage = () => {
     }
   }, [router]);
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // Validação com Yup
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required("O nome é obrigatório."),
+    whatsapp: Yup.string()
+      .matches(/^(\(\d{2}\)\s)?\d{1}\s\d{4,5}-\d{4}$/, "Número de WhatsApp inválido.")
+      .required("O WhatsApp é obrigatório."),
+    password: Yup.string().required("A senha é obrigatória."),
+  });
 
-    // Verificar se o WhatsApp é válido
-    if (!validateWhatsapp(whatsapp)) {
-      setError("Número de WhatsApp inválido.");
-      return;
-    }
+  // Formik para gerenciar o formulário
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      whatsapp: "",
+      password: "",
+    },
+    validationSchema,
+    onSubmit: async (values, { setSubmitting, setErrors }) => {
+      try {
+        const response = await axios.post("http://localhost:3000/api/auth/login", values);
 
-    try {
-      const response = await axios.post("http://localhost:3000/api/auth/login", {
-        name,
-        whatsapp,
-        password,
-      });
+        // Armazenar o token e os dados do usuário no localStorage
+        localStorage.setItem("authToken", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
 
-      // Armazenar o token e os dados do usuário no localStorage
-      localStorage.setItem("authToken", response.data.token);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
-
-      // Redirecionar para a página principal ou dashboard
-      router.push("/");
-    } catch (err) {
-      setError("Erro ao fazer login, verifique suas credenciais.");
-      console.error(err);
-    }
-  };
+        // Redirecionar para a página principal ou dashboard
+        router.push("/");
+      } catch (err) {
+        setErrors({ password: "Erro ao fazer login, verifique suas credenciais." });
+        console.error(err);
+      } finally {
+        setSubmitting(false);
+      }
+    },
+  });
 
   return (
     <div className={styles.container}>
-
       <Image
         className={styles.logo}
         src="/logo.jpeg"
@@ -81,41 +80,54 @@ const LoginPage = () => {
         height={250}
         priority
       />
-      <form onSubmit={handleLogin} className={styles.form}>
+      <form onSubmit={formik.handleSubmit} className={styles.form}>
         <h1>Login</h1>
-        {error && <p className={styles.error}>{error}</p>}
         <div>
           <label>Nome</label>
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            name="name"
+            value={formik.values.name}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             required
           />
+          {formik.touched.name && formik.errors.name && (
+            <p className={styles.error}>{formik.errors.name}</p>
+          )}
         </div>
         <div>
           <label>WhatsApp</label>
           <input
             ref={whatsappRef} // Referência para aplicar a máscara
             type="text"
-            value={whatsapp}
-            onChange={(e) => setWhatsapp(e.target.value)}
+            name="whatsapp"
+            value={formik.values.whatsapp}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             required
           />
-          {whatsapp && !validateWhatsapp(whatsapp) && (
-            <p className={styles.error}>Número de WhatsApp inválido.</p>
+          {formik.touched.whatsapp && formik.errors.whatsapp && (
+            <p className={styles.error}>{formik.errors.whatsapp}</p>
           )}
         </div>
         <div>
           <label>Senha</label>
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             required
           />
+          {formik.touched.password && formik.errors.password && (
+            <p className={styles.error}>{formik.errors.password}</p>
+          )}
         </div>
-        <button type="submit">Entrar</button>
+        <button type="submit" disabled={formik.isSubmitting}>
+          Entrar
+        </button>
       </form>
     </div>
   );

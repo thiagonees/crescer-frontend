@@ -6,7 +6,7 @@ import Header from "./components/Header";
 export default function Home() {
   return (
     <div className={styles.page}>
-            <Header /> 
+             <Header />
       <main className={styles.main}>
       <Image
           className={styles.logo}
