@@ -56,6 +56,26 @@
     font-size: 1rem;
     width: 100%;
   }
+
+  .form span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+  }
+  
+  .form span a {
+    position: relative;
+    right: 60px;
+    top: 10px;
+    text-transform: uppercase;
+  
+  }
+  
+  .form span a:hover {
+    text-decoration: underline;
+  }
+  
   
   /* Estilos para o botão */
   .form button {

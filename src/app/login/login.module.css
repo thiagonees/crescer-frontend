@@ -68,6 +68,26 @@
 
 }
 
+.form span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ 
+}
+
+.form span a {
+  position: relative;
+  right: 60px;
+  top: 10px;
+  text-transform: uppercase;
+
+}
+
+.form span a:hover {
+  text-decoration: underline;
+}
+
+
 .inputWrapper input {
   width: 100%;
   padding-right: 2.5rem; /* Espaço para o ícone */

@@ -125,9 +125,12 @@ const LoginPage = () => {
             <p className={styles.error}>{formik.errors.password}</p>
           )}
         </div>
+        <span className={styles.registerButton}>
         <button type="submit" disabled={formik.isSubmitting}>
           Entrar
         </button>
+        <a href="/register">Cadastre-se</a>
+        </span>
       </form>
     </div>
   );

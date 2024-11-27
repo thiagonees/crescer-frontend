@@ -178,13 +178,16 @@ const RegisterPage = () => {
             <p className={styles.error}>{formik.errors.password}</p>
           )}
         </div>
+        <span className={styles.registerButton}>
         <button
           type="submit"
           className={isLoading ? styles.disabled : ""}
           disabled={isLoading}
         >
           {isLoading ? <ClipLoader color="#ffffff" size={20} /> : "Cadastrar"}
-        </button>
+          </button>
+        <a href="/login">Login</a>
+        </span>
       </form>
       <Toaster />
     </div>
