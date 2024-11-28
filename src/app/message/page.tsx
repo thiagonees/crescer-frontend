@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import toast, { Toaster } from "react-hot-toast";
 import styles from "./sendMessage.module.css"; 
+import PrivateRoute from "../components/PrivateRoute";
 
 interface UserData {
   _id: string;
@@ -102,6 +103,7 @@ const SendMessagePage = () => {
   });
 
   return (
+    <PrivateRoute>
     <div className={styles.container}>
       <Image
         className={styles.logo}
@@ -137,6 +139,7 @@ const SendMessagePage = () => {
       </form>
       <Toaster />
     </div>
+    </PrivateRoute>
   );
 };
 

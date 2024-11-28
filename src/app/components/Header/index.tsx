@@ -7,22 +7,27 @@ import styles from './header.module.css';
 export default function Header() {
   const router = useRouter();
   const [user, setUser] = useState<{ name: string } | null>(null);
-
+  const [initialized, setInitialized] = useState(false); 
   useEffect(() => {
     // Recuperar o usuário do localStorage
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
-  }, []); // Esse useEffect só será executado uma vez, no carregamento inicial
+    setInitialized(true); 
+  }, []); 
 
   const handleLogout = () => {
-    // Limpar os dados de login (user e token) e redirecionar
+ 
     localStorage.removeItem('user');
     localStorage.removeItem('authToken');
-    setUser(null); // Garantir que o state seja limpo
-    router.push('/'); // Redireciona para a página de login
+    setUser(null); 
+    router.push('/'); 
   };
+
+  if (!initialized) {
+    return null; 
+  }
 
   return (
     <header className={styles.header}>
