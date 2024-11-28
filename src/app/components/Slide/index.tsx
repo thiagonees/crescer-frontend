@@ -45,16 +45,7 @@ const SlideShow: React.FC<SlideShowProps> = ({ images }) => {
       <button onClick={handleNext} className={styles.nextButton}>
       <FiArrowRight size={24} />
       </button>
-      <div className={styles.indicators}>
-        {images.map((_, index) => (
-          <span
-            key={index}
-            className={`${styles.indicator} ${
-              index === currentIndex ? styles.active : ""
-            }`}
-          />
-        ))}
-      </div>
+      
     </div>
   );
 };

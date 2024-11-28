@@ -47,24 +47,6 @@
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-.indicators {
-  display: flex;
-  justify-content: center;
-  margin-top: 15px;
-}
-
-.indicator {
-  width: 10px;
-  height: 10px;
-  margin: 0 6px;
-  position: relative;
-  bottom: 100px;
-  border-radius: 50%;
-  border: 1px solid;
-  background-color: #ccc;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
 
 .indicator.active {
   background-color: #333;
