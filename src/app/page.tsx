@@ -7,9 +7,10 @@ import SlideShow from "./components/Slide";
 export default function Home() {
 
   const images = [
-    "/image-1.jpg",
-    "/image-2.jpg",
-    "/image-3.jpg",
+    "/images/slide-image-1.jpeg",
+    "/images/slide-image-2.jpeg",
+
+
   ];
 
   return (

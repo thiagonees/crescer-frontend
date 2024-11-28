@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## Estrutura do Projeto
 
-First, run the development server:
+- **web**: Pasta contendo o frontend da aplicação.
+- **backend**: Pasta contendo o backend da aplicação.
+
+## Como Rodar o Projeto
+
+### Passo 1: Configuração do Frontend
+
+1. Acesse a pasta `web` fornecida (via zip).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd web
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Instale as dependências com o comando:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Após a instalação, inicie o servidor de desenvolvimento com comando:
 
-## Learn More
+```bash
+yarn start
+```
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+O frontend será iniciado na porta 3001. Você pode acessá-lo em http://localhost:3001
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Passo 2: Configuração do Backend
+Acesse a pasta backend fornecida (via zip)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+cd backend
+Instale as dependências utilizando o comando:
+```bash
+yarn install
+```
+
+Após a instalação, inicie o servidor do backend com comando:
+```bash
+yarn start
+```
+
+
+O backend será iniciado na porta 3000. Você pode acessá-lo em http://localhost:3000.
+
+
+## Configuração do Banco de Dados
+Passo 1: Criar Conta no MongoDB Atlas
+Acesse o site MongoDB Atlas e crie uma conta, caso ainda não tenha uma.
+
+https://account.mongodb.com/account/login
+
+Após criar sua conta, crie um novo cluster com o nome Backend. Siga as instruções fornecidas pelo MongoDB para configurar o cluster e aguarde até que ele seja criado.
+
+Passo 2: Conectar ao Cluster
+Após a criação do cluster, vá para a seção Connect no MongoDB Atlas.
+
+Selecione Connect your application e, em seguida, copie a string de conexão fornecida, que será semelhante a esta:
+
+```bash
+mongodb+srv://<username>:<db_password>@backend.ob6ly.mongodb.net/?retryWrites=true&w=majority&appName=Backend
+```
+```bash
+Substitua <db_password> pelo senha que você escolher durante a criação do cluster.
+```
+
+Passo 3: Configuração do Arquivo .env
+
+No diretório do backend, crie um arquivo .env com base no arquivo .env.example fornecido.
+
+Dentro do arquivo .env, adicione a string de conexão do MongoDB conforme o exemplo abaixo:
+
+
+```bash
+MONGO_URI=mongodb+srv://<username>:<db_password>@backend.ob6ly.mongodb.net/?retryWrites=true&w=majority&appName=Backend
+
+```
+
+Substitua <db_password> pela senha escolhida ao criar o cluster.
+
+No arquivo .env deve ser colocado o JWT_SECRET abaixo ou gere um novo secret se deseajar.
+
+```bash
+JWT_SECRET=026191e4b0dc8ea477066c29226b0d215b789d7cb677b140f588798c5e08981
+
+```
+
+
+
+Se precisar pegar ou alterar a senha do banco de dados, você pode fazer isso acessando o MongoDB Atlas na seção Security > Database Access, clicando em Edit, e depois Edit Password. Você pode também optar por gerar uma senha segura automaticamente em (AUTO GENERATE SECURE PASSWORD).
+
+Resumo das Portas
+Backend: http://localhost:3000
+Frontend: http://localhost:3001
+

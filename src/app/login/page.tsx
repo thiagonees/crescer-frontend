@@ -65,7 +65,7 @@ const LoginPage = () => {
             setErrors({ password: "Credenciais inválidas. Verifique e tente novamente." });
           } else {
             console.error("Erro desconhecido:", err.message);
-            setErrors({ password: "Erro desconhecido ao tentar fazer login." });
+            setErrors({ password: "Erro ao tentar fazer login, verifique suas credenciais." });
           }
         } else {
           console.error("Erro inesperado:", err);

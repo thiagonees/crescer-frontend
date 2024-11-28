@@ -1,9 +1,8 @@
 .slideshow {
   position: relative;
   top: 200px;
-  width: 100%;
-  max-height: 450px;
-  max-width: 900px;
+  width: 900px;
+  max-height: 500px;
   margin: 0 auto;
   overflow: hidden;
   border: 2px solid #ccc;
@@ -12,8 +11,8 @@
 
 .slide img {
   width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
+
 }
 
 .prevButton,
@@ -59,7 +58,7 @@
   height: 10px;
   margin: 0 6px;
   position: relative;
-  bottom: 190px;
+  bottom: 100px;
   border-radius: 50%;
   border: 1px solid;
   background-color: #ccc;
