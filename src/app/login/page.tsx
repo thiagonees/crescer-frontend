@@ -55,9 +55,10 @@ const LoginPage = () => {
           const redirectTo = localStorage.getItem("redirectTo") || "/";
           router.push(redirectTo);
 
-          // Limpa erros, caso existam
+          localStorage.removeItem("redirectTo");
+
           setErrors({});
-          return; // Finaliza o fluxo aqui
+          return; // Finaliza o fluxo 
         }
       } catch (err) {
         if (axios.isAxiosError(err)) {
