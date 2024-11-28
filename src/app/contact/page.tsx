@@ -9,7 +9,7 @@ export default function ContactPage() {
       <h1 className={styles.title}>Entre em Contato</h1>
       <div className={styles.icons}>
         <a
-          href="https://wa.me/SeuNumeroAqui"
+          href="https://wa.me/+5577999493842"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.iconButton}
