@@ -9,6 +9,9 @@ export default function Home() {
   const images = [
     "/images/slide-image-1.jpeg",
     "/images/slide-image-2.jpeg",
+    "/images/slide-image-3.jpeg",
+    "/images/slide-image-4.jpeg",
+    "/images/slide-image-5.jpeg",
 
 
   ];
