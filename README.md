@@ -14,13 +14,13 @@
 cd web
 ```
 
-Instale as dependências com o comando:
+Instale as dependências rodando o comando:
 
 ```bash
 yarn install
 ```
 
-Após a instalação, inicie o servidor de desenvolvimento com comando:
+Após a instalação, inicie o servidor de desenvolvimento rodando o comando:
 
 ```bash
 yarn start
@@ -35,12 +35,12 @@ Passo 2: Configuração do Backend
 Acesse a pasta backend fornecida (via zip)
 
 cd backend
-Instale as dependências utilizando o comando:
+Instale as dependências utilizando rodando o comando:
 ```bash
 yarn install
 ```
 
-Após a instalação, inicie o servidor do backend com comando:
+Após a instalação, inicie o servidor do backend rodando o comando:
 ```bash
 yarn start
 ```
@@ -83,7 +83,10 @@ MONGO_URI=mongodb+srv://<username>:<db_password>@backend.ob6ly.mongodb.net/?retr
 
 Substitua <db_password> pela senha escolhida ao criar o cluster.
 
-No arquivo .env deve ser colocado o JWT_SECRET abaixo ou gere um novo secret se deseajar.
+
+Se precisar pegar ou alterar a senha do banco de dados, você pode fazer isso acessando o MongoDB Atlas na seção Security > Database Access, clicando em Edit, e depois Edit Password. Você pode também optar por gerar uma senha segura automaticamente em (AUTO GENERATE SECURE PASSWORD).
+
+No arquivo .env deve ser colocado também o JWT_SECRET abaixo ou crie um novo secret se deseajar.
 
 ```bash
 JWT_SECRET=026191e4b0dc8ea477066c29226b0d215b789d7cb677b140f588798c5e08981
@@ -92,7 +95,6 @@ JWT_SECRET=026191e4b0dc8ea477066c29226b0d215b789d7cb677b140f588798c5e08981
 
 
 
-Se precisar pegar ou alterar a senha do banco de dados, você pode fazer isso acessando o MongoDB Atlas na seção Security > Database Access, clicando em Edit, e depois Edit Password. Você pode também optar por gerar uma senha segura automaticamente em (AUTO GENERATE SECURE PASSWORD).
 
 Resumo das Portas
 Backend: http://localhost:3000
