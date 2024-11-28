@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Header from "./components/Header";
 import SlideShow from "./components/Slide";
+import IntroText from "./components/IntroText";
 
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
       <Header />
       <main className={styles.main}>
         <div>
+        <IntroText />
           <SlideShow images={images} />
         </div>
       </main>

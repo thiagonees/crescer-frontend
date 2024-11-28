@@ -1,7 +1,7 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 60px;
 }
 
 .title {
@@ -16,6 +16,8 @@
   grid-template-columns: 1fr 1fr;
   gap: 30px;
   padding: 20px;
+  margin-bottom: 50px;
+
 }
 
 .testimonial {
