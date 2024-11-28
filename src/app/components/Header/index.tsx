@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -7,27 +7,21 @@ import styles from './header.module.css';
 export default function Header() {
   const router = useRouter();
   const [user, setUser] = useState<{ name: string } | null>(null);
-  const [initialized, setInitialized] = useState(false); 
+
   useEffect(() => {
-    // Recuperar o usuário do localStorage
+    // Recupera o usuário de forma síncrona
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
-    setInitialized(true); 
   }, []); 
 
   const handleLogout = () => {
- 
     localStorage.removeItem('user');
     localStorage.removeItem('authToken');
     setUser(null); 
     router.push('/'); 
   };
-
-  if (!initialized) {
-    return null; 
-  }
 
   return (
     <header className={styles.header}>

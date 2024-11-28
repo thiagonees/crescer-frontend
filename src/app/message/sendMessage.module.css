@@ -39,9 +39,9 @@
   }
   
   .logo  {
-    margin-bottom: 3\0px;
+    margin-bottom: 100px;
     position: relative;
-    bottom: 10px;
+    top: 40px;
   }
   
   .form button {
@@ -69,3 +69,10 @@
     margin-bottom: 1rem;
   }
   
+
+  @media (max-width: 600px) {
+    .form textarea {
+      width: 370px;
+    }
+    
+  }
