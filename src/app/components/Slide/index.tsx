@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import styles from "./slideshow.module.css";
 
 type SlideShowProps = {
-  images: string[]; // Lista de URLs das imagens
+  images: string[]; 
 };
 
 const SlideShow: React.FC<SlideShowProps> = ({ images }) => {

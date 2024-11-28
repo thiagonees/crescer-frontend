@@ -16,24 +16,9 @@ export default function Home() {
     <div className={styles.page}>
       <Header />
       <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/logo.jpeg"
-          alt="Next.js logo"
-          width={300}
-          height={200}
-          priority
-        />
-
         <div>
           <SlideShow images={images} />
         </div>
-        {/* <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol> */}
       </main>
     </div>
   );

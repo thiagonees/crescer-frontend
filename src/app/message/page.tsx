@@ -45,7 +45,7 @@ const SendMessagePage = () => {
       } catch (error) {
         toast.error("Erro ao processar dados do usuário no localStorage");
         console.error(error);
-        router.push("/login"); // Redireciona em caso de erro
+        router.push("/login");
       }
     } else {
       toast.error("Dados do usuário não encontrados no localStorage");
@@ -86,7 +86,7 @@ const SendMessagePage = () => {
           },
           {
             headers: {
-              Authorization: `Bearer ${token}`, // Inclui o token no cabeçalho
+              Authorization: `Bearer ${token}`, 
             },
           }
         );

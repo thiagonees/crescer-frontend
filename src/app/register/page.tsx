@@ -33,7 +33,6 @@ const RegisterPage = () => {
   const whatsappRef = useRef<HTMLInputElement>(null);
   const cpfRef = useRef<HTMLInputElement>(null);
 
-  // Aplicando as máscaras quando o componente for montado
   useEffect(() => {
     const whatsappMask = new Inputmask("(99) 9 9999-9999");
     const cpfMask = new Inputmask("999.999.999-99");
@@ -89,7 +88,6 @@ const RegisterPage = () => {
             });
           }
         } else {
-          // Caso o erro não tenha a estrutura esperada
           toast.error("Erro inesperado!", {
             duration: 3000,
           });

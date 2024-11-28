@@ -1,8 +1,9 @@
 .slideshow {
   position: relative;
+  top: 200px;
   width: 100%;
   max-height: 450px;
-  max-width: 700px;
+  max-width: 900px;
   margin: 0 auto;
   overflow: hidden;
   border: 2px solid #ccc;
@@ -58,7 +59,7 @@
   height: 10px;
   margin: 0 6px;
   position: relative;
-  bottom: 50px;
+  bottom: 190px;
   border-radius: 50%;
   border: 1px solid;
   background-color: #ccc;

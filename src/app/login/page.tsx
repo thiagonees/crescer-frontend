@@ -5,36 +5,28 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import styles from './login.module.css'; // Importa o CSS
+import styles from './login.module.css';
 import Image from "next/image";
-import Inputmask from "inputmask"; // Importa o Inputmask
+import Inputmask from "inputmask";
 
 const LoginPage = () => {
   const router = useRouter();
-
-  // Referência para o campo de WhatsApp
   const whatsappRef = useRef<HTMLInputElement>(null);
 
-  // Aplicar a máscara no campo de WhatsApp
   useEffect(() => {
     const whatsappMask = new Inputmask("(99) 9 9999-9999");
-    
     if (whatsappRef.current) {
       whatsappMask.mask(whatsappRef.current);
     }
   }, []);
 
-  // Verificar se o usuário está autenticado ao carregar a página
   useEffect(() => {
     const token = localStorage.getItem("authToken");
-
     if (token) {
-      // Redireciona para a página inicial caso o token de autenticação esteja presente
       router.push("/");
     }
   }, [router]);
 
-  // Validação com Yup
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("O nome é obrigatório."),
     whatsapp: Yup.string()
@@ -43,7 +35,6 @@ const LoginPage = () => {
     password: Yup.string().required("A senha é obrigatória."),
   });
 
-  // Formik para gerenciar o formulário
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -53,17 +44,33 @@ const LoginPage = () => {
     validationSchema,
     onSubmit: async (values, { setSubmitting, setErrors }) => {
       try {
+        setSubmitting(true);
+
         const response = await axios.post("http://localhost:3000/api/auth/login", values);
 
-        // Armazenar o token e os dados do usuário no localStorage
-        localStorage.setItem("authToken", response.data.token);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
+        if (response.status === 200) {
+          localStorage.setItem("authToken", response.data.token);
+          localStorage.setItem("user", JSON.stringify(response.data.user));
 
-        // Redirecionar para a página principal ou dashboard
-        router.push("/");
+          const redirectTo = localStorage.getItem("redirectTo") || "/";
+          router.push(redirectTo);
+
+          // Limpa erros, caso existam
+          setErrors({});
+          return; // Finaliza o fluxo aqui
+        }
       } catch (err) {
-        setErrors({ password: "Erro ao fazer login, verifique suas credenciais." });
-        console.error(err);
+        if (axios.isAxiosError(err)) {
+          if (err.response && err.response.status === 401) {
+            setErrors({ password: "Credenciais inválidas. Verifique e tente novamente." });
+          } else {
+            console.error("Erro desconhecido:", err.message);
+            setErrors({ password: "Erro desconhecido ao tentar fazer login." });
+          }
+        } else {
+          console.error("Erro inesperado:", err);
+          setErrors({ password: "Erro inesperado. Tente novamente mais tarde." });
+        }
       } finally {
         setSubmitting(false);
       }
@@ -99,7 +106,7 @@ const LoginPage = () => {
         <div>
           <label>WhatsApp</label>
           <input
-            ref={whatsappRef} // Referência para aplicar a máscara
+            ref={whatsappRef}
             type="text"
             name="whatsapp"
             value={formik.values.whatsapp}
@@ -126,10 +133,10 @@ const LoginPage = () => {
           )}
         </div>
         <span className={styles.registerButton}>
-        <button type="submit" disabled={formik.isSubmitting}>
-          Entrar
-        </button>
-        <a href="/register">Cadastre-se</a>
+          <button type="submit" disabled={formik.isSubmitting}>
+            {formik.isSubmitting ? "Aguarde..." : "Entrar"}
+          </button>
+          <a href="/register">Cadastre-se</a>
         </span>
       </form>
     </div>

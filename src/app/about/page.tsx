@@ -1,6 +1,6 @@
 // pages/about.tsx
 import Image from 'next/image';
-import styles from './about.module.css'; // Importando o arquivo CSS Module
+import styles from './about.module.css';
 
 export default function AboutPage() {
   return (
