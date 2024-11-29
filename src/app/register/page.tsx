@@ -58,7 +58,7 @@ const RegisterPage = () => {
       setIsLoading(true);
 
       try {
-        const response = await axios.post("http://localhost:3000/api/auth/register", values);
+        const response = await axios.post("https://crescer-mong-api.vercel.app/api/auth/register", values);
       
         toast.success("Cadastro realizado com sucesso!", {
           duration: 4000,

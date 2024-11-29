@@ -46,7 +46,7 @@ const LoginPage = () => {
       try {
         setSubmitting(true);
 
-        const response = await axios.post("http://localhost:3000/api/auth/login", values);
+        const response = await axios.post("https://crescer-mong-api.vercel.app/api/auth/login", values);
 
         if (response.status === 200) {
           localStorage.setItem("authToken", response.data.token);
