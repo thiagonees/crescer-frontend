@@ -3,8 +3,8 @@
     height: 100vh; /* Ocupa toda a altura da tela */
     background-color: #fff;
     padding: 10px;
-    position: absolute;
-    top: 0;
+    position: relative;
+    top: 60px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -26,6 +26,14 @@
 
 
   }
+
+
+.form img {
+  position: relative;
+  left: 30%;
+  margin-bottom: 20px;
+}
+
   
   .form h1 {
     text-align: center;

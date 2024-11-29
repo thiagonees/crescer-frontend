@@ -108,15 +108,15 @@ const RegisterPage = () => {
 
   return (
     <div className={styles.container}>
+      <form onSubmit={formik.handleSubmit} className={styles.form}>
       <Image
         className={styles.logo}
         src="/logo.jpeg"
         alt="Next.js logo"
-        width={300}
-        height={200}
+        width={150}
+        height={90}
         priority
       />
-      <form onSubmit={formik.handleSubmit} className={styles.form}>
         <h1>Cadastrar</h1>
         <div>
           <label>Nome</label>

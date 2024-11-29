@@ -8,7 +8,7 @@
   position: relative;
   top:0;
   width: 100vw;
-  height: 50px;
+  height: 60px;
 }
 
 .userInfo {
@@ -19,6 +19,12 @@
 .userInfo span {
   margin-right: 15px;
   font-weight: 600;
+}
+
+.header img  {
+  position: relative;
+  top: 2px;
+  left: 40px;
 }
 
 .logoutButton {
@@ -44,6 +50,9 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  position: relative;
+  bottom: 14px;
+ 
 }
 
 .authButtons button:hover {

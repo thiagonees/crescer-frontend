@@ -105,15 +105,15 @@ const SendMessagePage = () => {
   return (
     <PrivateRoute>
     <div className={styles.container}>
+      <form onSubmit={formik.handleSubmit} className={styles.form}>
       <Image
         className={styles.logo}
         src="/logo.jpeg"
         alt="Logo"
-        width={300}
-        height={200}
+        width={150}
+        height={90}
         priority
       />
-      <form onSubmit={formik.handleSubmit} className={styles.form}>
         <h1>Enviar Mensagem</h1>
         <div>
           <label htmlFor="message">Mensagem</label>
