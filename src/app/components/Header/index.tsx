@@ -1,16 +1,29 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './header.module.css';
 import Image from 'next/image';
 
+type User = {
+  name: string;
+};
+
 export default function Header() {
   const router = useRouter();
-  const [user, setUser] = useState<{ name: string } | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  
+  // Inicializa o estado com o usuário do localStorage (se existir)
+  const [user, setUser] = useState<User | null>(() => {
+    if (typeof window !== 'undefined') {
+      const storedUser = localStorage.getItem('user');
+      return storedUser ? JSON.parse(storedUser) : null;
+    }
+    return null;
+  });
 
   useEffect(() => {
-    // Recupera o usuário de forma síncrona
+    // Atualiza o estado com qualquer mudança no localStorage (precaução)
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
@@ -30,14 +43,6 @@ export default function Header() {
         <div className={styles.userInfo}>
           <span>Olá, {user.name}</span>
           <button className={styles.logoutButton} onClick={handleLogout}>Sair</button>
-          <Image
-            className={styles.logo}
-            src="/images/header-logo.png"
-            alt="Next.js logo"
-            width={80}
-            height={50}
-            priority
-          />
         </div>
       ) : (
         <div className={styles.authButtons}>

@@ -82,14 +82,7 @@ const LoginPage = () => {
     <div className={styles.container}>
 
       <form onSubmit={formik.handleSubmit} className={styles.form}>
-      <Image
-        className={styles.logo}
-        src="/logo.jpeg"
-        alt="Next.js logo"
-        width={150}
-        height={90}
-        priority
-      />
+
         <h1>Login</h1>
         <div>
           <label>Nome</label>

@@ -14,7 +14,7 @@
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
-  top: 50px;
+  top: 100px;
 
 }
 
@@ -36,12 +36,6 @@
   line-height: 1.5;
   font-family: sans-serif;
   box-sizing: border-box;
-}
-
-.form img {
-  position: relative;
-  left: 30%;
-  margin-bottom: 20px;
 }
 
 .form button {

@@ -14,14 +14,6 @@
     place-items: center; /* Centraliza o conteúdo tanto na vertical quanto na horizontal */
   }
 
-  .form img {
-    position: relative;
-    left: 30%;
-    margin-bottom: 20px;
-  }
-
-    
-
   .form  {
     width: 460px;
     background: #fff;

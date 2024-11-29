@@ -106,17 +106,8 @@ const SendMessagePage = () => {
     <PrivateRoute>
     <div className={styles.container}>
       <form onSubmit={formik.handleSubmit} className={styles.form}>
-      <Image
-        className={styles.logo}
-        src="/logo.jpeg"
-        alt="Logo"
-        width={150}
-        height={90}
-        priority
-      />
         <h1>Enviar Mensagem</h1>
         <div>
-          <label htmlFor="message">Mensagem</label>
           <textarea
             id="message"
             name="message"
