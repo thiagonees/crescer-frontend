@@ -14,28 +14,43 @@ export default function Header() {
   const [isLoading, setIsLoading] = useState(true);
   
   // Inicializa o estado com o usuário do localStorage (se existir)
-  const [user, setUser] = useState<User | null>(() => {
-    if (typeof window !== 'undefined') {
-      const storedUser = localStorage.getItem('user');
-      return storedUser ? JSON.parse(storedUser) : null;
-    }
-    return null;
-  });
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    // Atualiza o estado com qualquer mudança no localStorage (precaução)
+    // Recupera o usuário do localStorage e atualiza o estado
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
+    setIsLoading(false); // Marca que a busca do usuário foi concluída
+  }, []);
+
+  // Adiciona um listener para monitorar alterações no localStorage
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const storedUser = localStorage.getItem('user');
+      setUser(storedUser ? JSON.parse(storedUser) : null);
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    // Remove o listener ao desmontar o componente
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, []);
 
   const handleLogout = () => {
+    // Remove o usuário e o token de autenticação do localStorage
     localStorage.removeItem('user');
     localStorage.removeItem('authToken');
     setUser(null);
-    router.push('/');
+    router.replace('/'); // Redireciona para a página inicial
   };
+
+  if (isLoading) {
+    return <p>Carregando...</p>; // Exibe um texto de carregamento enquanto verifica o estado
+  }
 
   return (
     <header className={styles.header}>
