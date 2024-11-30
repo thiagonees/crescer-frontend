@@ -11,55 +11,58 @@ type User = {
 
 export default function Header() {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
-  
-  // Inicializa o estado com o usuário do localStorage (se existir)
-  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true); // Estado para controlar o carregamento inicial
+  const [user, setUser] = useState<User | null>(null); // Estado do usuário
 
+  // Atualiza o estado com o usuário salvo no localStorage ao montar o componente
   useEffect(() => {
-    // Recupera o usuário do localStorage e atualiza o estado
     const storedUser = localStorage.getItem('user');
+    console.log('Usuário recuperado do localStorage:', storedUser); // Debug
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
-    setIsLoading(false); // Marca que a busca do usuário foi concluída
+    setIsLoading(false); // Define que o carregamento terminou
   }, []);
 
-  // Adiciona um listener para monitorar alterações no localStorage
+  // Sincroniza mudanças no localStorage dinamicamente
   useEffect(() => {
     const handleStorageChange = () => {
       const storedUser = localStorage.getItem('user');
+      console.log('Alteração detectada no localStorage:', storedUser); // Debug
       setUser(storedUser ? JSON.parse(storedUser) : null);
     };
 
     window.addEventListener('storage', handleStorageChange);
 
-    // Remove o listener ao desmontar o componente
     return () => {
       window.removeEventListener('storage', handleStorageChange);
     };
   }, []);
 
+  // Função de logout
   const handleLogout = () => {
-    // Remove o usuário e o token de autenticação do localStorage
+    console.log('Fazendo logout...');
     localStorage.removeItem('user');
     localStorage.removeItem('authToken');
     setUser(null);
     router.replace('/'); // Redireciona para a página inicial
   };
 
-  if (isLoading) {
-    return <p>Carregando...</p>; // Exibe um texto de carregamento enquanto verifica o estado
-  }
-
   return (
     <header className={styles.header}>
-      {user ? (
+      {isLoading ? (
+        // Exibe um estado de carregamento enquanto verifica o usuário
+        <p>Carregando...</p>
+      ) : user ? (
+        // Exibe informações do usuário e botão de logout se o usuário estiver autenticado
         <div className={styles.userInfo}>
           <span>Olá, {user.name}</span>
-          <button className={styles.logoutButton} onClick={handleLogout}>Sair</button>
+          <button className={styles.logoutButton} onClick={handleLogout}>
+            Sair
+          </button>
         </div>
       ) : (
+        // Exibe botões de login/registro se o usuário não estiver autenticado
         <div className={styles.authButtons}>
           <button onClick={() => router.push('/login')}>Login</button>
           <button onClick={() => router.push('/register')}>Registrar</button>
