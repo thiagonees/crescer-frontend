@@ -1,8 +1,7 @@
 'use client';
 
-import React from 'react'; // Import necessário para compatibilidade
+import React, { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import { useState, useEffect, useMemo } from 'react';
 import styles from './header.module.css';
 import Image from 'next/image';
 
@@ -12,13 +11,9 @@ type User = {
 
 const Header = () => {
   const router = useRouter();
-  const [user, setUser] = useState<User | null>(() => {
-    if (typeof window !== 'undefined') {
-      const storedUser = localStorage.getItem('user');
-      return storedUser ? JSON.parse(storedUser) : null;
-    }
-    return null;
-  });
+
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true); // Estado para indicar o carregamento
 
   const handleLogout = () => {
     localStorage.removeItem('user');
@@ -28,14 +23,20 @@ const Header = () => {
   };
 
   useEffect(() => {
-    // Atualiza o estado do usuário ao carregar ou se o localStorage mudar
+    // Simula o carregamento do usuário
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
+    setIsLoading(false); // Conclui o carregamento
   }, []);
 
   const headerContent = useMemo(() => {
+    if (isLoading) {
+      // Exibe um placeholder ou nada enquanto está carregando
+      return <div className={styles.placeholder}>Carregando...</div>;
+    }
+
     return user ? (
       <div className={styles.userInfo}>
         <span>Olá, {user.name}</span>
@@ -57,7 +58,7 @@ const Header = () => {
         />
       </div>
     );
-  }, [user]); // Apenas muda quando o estado `user` muda
+  }, [isLoading, user]); // Recalcula apenas se `isLoading` ou `user` mudar
 
   return <header className={styles.header}>{headerContent}</header>;
 };
