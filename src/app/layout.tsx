@@ -19,7 +19,6 @@ export const metadata: Metadata = {
   title: "Crescer",
   description: "Espaço de desenvolvimento infantil",
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
